@@ -24,11 +24,25 @@ class RandomPlayer(Player):
             print(s, y)
                 
 
-            
+    def test_action(self, board):
+        sandbox = board.clone()
+        actions = ['Direction.Right']
+        scores = []
+        for action in actions:
+            sandbox.move(action)
+        sandbox.move(Direction.Drop)
+        score = 1
+        scores.append(score)
+        index = 0
+        return actions[index]
+        
 
     def choose_action(self, board):
-        self.print_board(board)
+        # self.print_board(board)
         time.sleep(0.5)
+        for cell in board.falling.cells:
+            if cell[0] == 1:
+                return Direction.Right
         if self.random.random() > 0.97:
             # 3% chance we'll discard or drop a bomb
             return self.random.choice([
